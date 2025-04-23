@@ -1,7 +1,7 @@
 {% load static %}
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,57 +9,78 @@
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
-    <div class="App">
-        <header class="App-header">
-            <div class="header-container">
-                <div>
+    <div class="container">
+        <!-- Шапка с заголовком и логотипом -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-text">
                     <h1>{{ title }}</h1>
-                    <h2>{{ subtitle }}</h2>
+                    <div class="header-meta">
+                        <span class="subtitle">{{ subtitle }}</span>
+                    </div>
                 </div>
-                
+                <img src="{% static 'logo.png' %}" alt="Логотип" class="header-logo">
             </div>
-
-            <div class="project-info">
-                <p>{{ description|linebreaks }}</p>
-                
-                <div class="developer-card">
-                    <h3>Разработчик:</h3>
-                    <p><strong>Студент:</strong> {{ developer_info.name }}</p>
-                    <p><strong>Университет:</strong> {{ developer_info.university }}</p>
-                    <img src="{% static 'logo.png' %}" alt="Логотип" class="logo">
-                    <p><strong>Год:</strong> {{ developer_info.year }}</p>
-                </div>
-            </div>
-
-    <div class="App">
-        <header class="App-header">
-            <h1>{{ title }}</h1>
-            <form method="post">
-                {% csrf_token %}
-                <label for="length">Длина (м):</label>
-                <input type="number" name="length" id="length" step="0.01" required value="{{ form_data.length|default_if_none:'' }}">
-                <br><br>
-
-                <label for="width">Ширина (м):</label>
-                <input type="number" name="width" id="width" step="0.01" required value="{{ form_data.width|default_if_none:'' }}">
-                <br><br>
-
-                <label for="height">Высота (м):</label>
-                <input type="number" name="height" id="height" step="0.01" value="{{ form_data.height|default_if_none:'' }}">
-                <br><br>
-                <button type="submit" name="calculate_volume">Рассчитать объем</button>
-            </form>
-
-            {% if area is not None %}
-                <h2>Результат:</h2>
-                <p>Площадь пола: {{ area }} м²</p>
-            {% endif %}
-
-            {% if volume is not None %}
-                <h2>Результат:</h2>
-                <p>Объем бетонной смеси: {{ volume }} м³</p>
-            {% endif %}
         </header>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Форма калькулятора -->
+            <section class="calculator-section">
+                <form method="post" class="calculator-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="length">Длина (м):</label>
+                        <input type="number" name="length" id="length" step="0.01" required 
+                               value="{{ form_data.length|default_if_none:'' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="width">Ширина (м):</label>
+                        <input type="number" name="width" id="width" step="0.01" required 
+                               value="{{ form_data.width|default_if_none:'' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height">Высота (м):</label>
+                        <input type="number" name="height" id="height" step="0.01" 
+                               value="{{ form_data.height|default_if_none:'' }}">
+                    </div>
+
+                    <div class="buttons">
+                        <button type="submit" name="calculate_volume" class="btn btn-primary">
+                            Рассчитать объем
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Блоки результатов -->
+                {% if area is not None %}
+                <div class="result">
+                    <h3>Результат:</h3>
+                    <p>Площадь пола: <strong>{{ area }} м²</strong></p>
+                </div>
+                {% endif %}
+
+                {% if volume is not None %}
+                <div class="result">
+                    <h3>Результат:</h3>
+                    <p>Объем бетонной смеси: <strong>{{ volume }} м³</strong></p>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- Информация о проекте -->
+            <section class="project-info">
+                <div class="description">
+                    {{ description|linebreaks }}
+                </div>
+                    <p><strong>Разработчик: студентка СТРбвп-2203в </strong> {{ developer_info.name }}</p>
+                    <p><strong>Университет:</strong> {{ developer_info.university }}</p>
+                    <p><strong>Год:</strong> {{ developer_info.year }}</p>
+                
+            </section>
+        </main>
     </div>
 </body>
 </html>
