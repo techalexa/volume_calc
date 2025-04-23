@@ -41,5 +41,70 @@ body {
   }
   
   .small {
-    font-size: 0.75rem;
+    font-size: 0.5rem;
   }
+
+  .project-info {
+    margin: 25px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.developer-card {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e2f0fd;
+    border-radius: 6px;
+    border-left: 4px solid #4CAF50;
+}
+
+h2 {
+    color: #555;
+    font-size: 0.5 em;
+    margin-top: 5px;
+}
+
+.app-header {
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-text {
+    flex: 1;
+}
+
+.header-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 4px;
+}
+
+.divider {
+    opacity: 0.5;
+}
+
+.header-logo {
+    height: 40px;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 0;
+    color: #343a40;
+}

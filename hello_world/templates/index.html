@@ -1,33 +1,65 @@
-{% load django_browser_reload %}
 {% load static %}
 
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="GitHub Codespaces ♥️ Django">
-    <meta name="author" content="GitHub Codespaces">
-    <meta name="generator" content="GitHub Codespaces">
-    <meta name="theme-color" content="#000000">
-    <title>{% block title %}{{ title }} | GitHub Codespaces ♥️ Django{% endblock %}</title>
-    
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
-
 <body>
     <div class="App">
         <header class="App-header">
-            <img src="{% static 'Octocat.png' %}" class="App-logo" alt="logo" />
-            <p>
-                GitHub Codespaces <span class="heart">♥️</span> Django
-            </p>
-            <p class="small">
-                Edit <code>hello_world/templates/index.html</code> and see changes live!
-            </p>
+            <div class="header-container">
+                <div>
+                    <h1>{{ title }}</h1>
+                    <h2>{{ subtitle }}</h2>
+                </div>
+                
+            </div>
+
+            <div class="project-info">
+                <p>{{ description|linebreaks }}</p>
+                
+                <div class="developer-card">
+                    <h3>Разработчик:</h3>
+                    <p><strong>Студент:</strong> {{ developer_info.name }}</p>
+                    <p><strong>Университет:</strong> {{ developer_info.university }}</p>
+                    <img src="{% static 'logo.png' %}" alt="Логотип" class="logo">
+                    <p><strong>Год:</strong> {{ developer_info.year }}</p>
+                </div>
+            </div>
+
+    <div class="App">
+        <header class="App-header">
+            <h1>{{ title }}</h1>
+            <form method="post">
+                {% csrf_token %}
+                <label for="length">Длина (м):</label>
+                <input type="number" name="length" id="length" step="0.01" required value="{{ form_data.length|default_if_none:'' }}">
+                <br><br>
+
+                <label for="width">Ширина (м):</label>
+                <input type="number" name="width" id="width" step="0.01" required value="{{ form_data.width|default_if_none:'' }}">
+                <br><br>
+
+                <label for="height">Высота (м):</label>
+                <input type="number" name="height" id="height" step="0.01" value="{{ form_data.height|default_if_none:'' }}">
+                <br><br>
+                <button type="submit" name="calculate_volume">Рассчитать объем</button>
+            </form>
+
+            {% if area is not None %}
+                <h2>Результат:</h2>
+                <p>Площадь пола: {{ area }} м²</p>
+            {% endif %}
+
+            {% if volume is not None %}
+                <h2>Результат:</h2>
+                <p>Объем бетонной смеси: {{ volume }} м³</p>
+            {% endif %}
         </header>
     </div>
 </body>
-
 </html>
