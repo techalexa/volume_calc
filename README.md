@@ -1,4 +1,4 @@
-# Volume calculator base on GitHub Codespaces ♥️ Django
+# Volume calculator based on GitHub Codespaces template ♥️ Django
 
 
 
